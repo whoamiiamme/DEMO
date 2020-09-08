@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import fetchData from './../shared.js';
 import Card from '@material-ui/core/Card';
 
 import CardContent from '@material-ui/core/CardContent';
@@ -56,22 +56,16 @@ function Home(props) {
 	const [ results, setResults ] = useState([]);
 
 	useEffect(() => {
-		axios.get('https://disease.sh/v3/covid-19/all')
+		fetchData('all','GET',null)
 			  .then(function (response) {
 				setLatest(response.data);
 				setLoading('determinate');
-			  })
-			  .catch(function (error) {
-			    console.log(error);
-			  })
+			  });
 		
-		axios.get('https://disease.sh/v3/covid-19/countries')
+		fetchData('countries','GET',null)
 			.then(function (response) {
 			setLatest(response.data);
-			})
-			.catch(function (error) {
-				console.log(error);
-			})
+			});
 
 	}, []);
 
