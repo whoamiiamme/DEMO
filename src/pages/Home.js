@@ -56,19 +56,23 @@ function Home(props) {
 	const [ results, setResults ] = useState([]);
 
 	useEffect(() => {
-		axios
-			.all([
-				axios.get('https://disease.sh/v3/covid-19/all'),
-				axios.get('https://disease.sh/v3/covid-19/countries')
-			])
-			.then((res) => {
-				setLatest(res[0].data);
-				setResults(res[1].data);
+		axios.get('https://disease.sh/v3/covid-19/all')
+			  .then(function (response) {
+				setLatest(response.data);
 				setLoading('determinate');
+			  })
+			  .catch(function (error) {
+			    console.log(error);
+			  })
+		
+		axios.get('https://disease.sh/v3/covid-19/countries')
+			.then(function (response) {
+			setLatest(response.data);
 			})
-			.catch((err) => {
-				console.log(err);
-			});
+			.catch(function (error) {
+				console.log(error);
+			})
+
 	}, []);
 
 	const date = new Date(parseInt(latest.updated));
