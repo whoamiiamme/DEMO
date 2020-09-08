@@ -47,7 +47,7 @@ const AntSwitch = withStyles((theme) => ({
 	},
 	checked: {}
 }))(Switch);
-
+ 
 function Home(props) {
 	const [ darkTheme, setDarkTheme ] = useState(false);
 	const [ loading, setLoading ] = useState('indeterminate');
